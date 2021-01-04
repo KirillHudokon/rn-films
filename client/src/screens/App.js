@@ -1,26 +1,20 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import {
   View,
   Text,
   ScrollView,
+  StyleSheet
 } from 'react-native';
+import ActionsBar from '../containers/ActionsBar';
+import SearchBar from '../containers/SearchBar';
 
 
 const App = () => {
   return (
     <ScrollView>
-      <View>
-        <Text>
-            1 1111
-        </Text>
+      <View style={styles.container}>
+        <SearchBar/>
+        <ActionsBar/>
       </View>
     </ScrollView>
   );
@@ -39,4 +33,14 @@ App.options = {
     }
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F5FCFF',
+    paddingTop: 15,
+    paddingLeft: 10,
+    paddingRight: 10
+  },
+})
 export default App;
