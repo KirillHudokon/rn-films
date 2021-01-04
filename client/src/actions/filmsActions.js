@@ -86,6 +86,7 @@ export const getFilms = () => async dispatch => {
         const {data} = await filmsApi.get()
         dispatch(getFilmsSuccess(data))
     }catch(e){
+        console.log(e, e.message)
         dispatch(getFilmsFail(e.message))
     }
 }

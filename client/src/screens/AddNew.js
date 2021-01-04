@@ -1,31 +1,24 @@
-import React from 'react';
+import React from 'react'
 import {
   View,
-  Text,
   ScrollView,
   StyleSheet
 } from 'react-native';
-import ActionsBar from '../containers/ActionsBar';
-import Films from '../containers/Films';
-import SearchBar from '../containers/SearchBar';
-
-
-const App = ({componentId}) => {
+import AddNewForm from '../containers/AddNewForm';
+const AddNew = ({componentId}) => {
   return (
     <ScrollView style={styles.app}>
       <View style={styles.container}>
-        <SearchBar/>
-        <ActionsBar componentId={componentId}/>
-        <Films/>
+        <AddNewForm componentId={componentId}/>
       </View>
     </ScrollView>
   );
 };
 
-App.options = {
+AddNew.options = {
   topBar: {
     title: {
-      text: 'Film info',
+      text: 'Add new film',
       color: 'white',
       fontSize: 19,
       alignment: 'center'
@@ -45,4 +38,4 @@ const styles = StyleSheet.create({
     paddingRight: 10
   },
 })
-export default App;
+export default AddNew;

@@ -47,10 +47,9 @@ const Film = ({
                 </View>
                 <View style={styles.filmDeleteContainer}>
                     <TouchableOpacity style={styles.filmDeleteTouch} onPress={()=>deleteFilm(film)}>
-                        <Icon.Button
-                            name="camera"
-                            backgroundColor="white"
-                        />
+                        <Text>
+                          <Icon name="trash" size={20} color="white"/>;  
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -101,6 +100,7 @@ const styles = StyleSheet.create({
         right: 0
     },
     filmDeleteTouch:{
+        backgroundColor:'black',
         width: '100%',
         height: '100%',
         alignItems: 'center',

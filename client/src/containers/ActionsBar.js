@@ -6,12 +6,12 @@ import {
   StyleSheet    
 } from 'react-native';
 import Action from '../components/Action';
-
-const ActionsBar = ({sortFilms}) => {
+import {goPush} from '../navigation'
+const ActionsBar = ({sortFilms, componentId}) => {
   return (
     <View style={styles.actionBar}>
        <Action action={sortFilms} text='Sort a-z'/>
-       <Action action={()=>{}} text='Add new'/>
+       <Action action={()=>goPush(componentId,'AddNew')} text='Add new'/>
     </View>
   );
 };
