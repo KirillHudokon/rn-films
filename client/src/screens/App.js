@@ -6,6 +6,7 @@ import {
   StyleSheet
 } from 'react-native';
 import ActionsBar from '../containers/ActionsBar';
+import Films from '../containers/Films';
 import SearchBar from '../containers/SearchBar';
 
 
@@ -15,6 +16,7 @@ const App = () => {
       <View style={styles.container}>
         <SearchBar/>
         <ActionsBar/>
+        <Films/>
       </View>
     </ScrollView>
   );

@@ -20,6 +20,7 @@ const mapDispatchToProps = {
 }
 const styles = StyleSheet.create({
     actionBar: {
+        marginBottom: 20,
         flexDirection: 'row',
         justifyContent: 'space-between'
     }
