@@ -5,6 +5,8 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native'
+import Confirmation from './Confirmation'
+import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from 'react-native-paper';
 import {textValues} from '../utils/textValues'
@@ -13,8 +15,15 @@ const Film = ({
   deleteFilm
 }) => {
     const [isOpen, setVisibility] = useState(false);
+    const [isModalOpen, setModalVisibility] = useState(false)
+    const changeModalVisibility = () =>{
+        setModalVisibility(!isModalOpen) 
+     } 
     const changeVisibility = (e) =>{
        setVisibility(!isOpen) 
+    }
+    const deleteFilmAction = () => {
+        deleteFilm(film)
     } 
     const renderButton = () => {
         return <Button mode="outlined" onPress={changeVisibility}>
@@ -23,7 +32,7 @@ const Film = ({
     }
     const renderFilmInfo = () => {
         const filmInfo = Object.entries(film).map(info => {
-            if(info[0] !== '_id' && info[0] !== '__v'){
+            if(info[0] !== 'title' && info[0] !== '__v'){
                 return <View key={`${film.id} - ${info[0]} : ${info[1]}`} style={styles.filmInfo}>
                     <Text>
                         {`${textValues[info[0]]} : ${info[1]}`}
@@ -37,29 +46,37 @@ const Film = ({
             </View>
         ) : null
     }
+    const renderModal = () => {
+        return <Modal isVisible={isModalOpen} onBackdropPress={changeModalVisibility}>
+            <Confirmation closeModal={changeModalVisibility} action={deleteFilmAction}/>
+        </Modal> 
+      }
     return (
-      <View style={styles.film}>
-            <View style={styles.filmHeader}>
-                <View style={styles.filmTitleContainer}>
-                    <Text style={styles.filmTitle}>
-                        id: {film._id}
-                    </Text>
-                </View>
-                <View style={styles.filmDeleteContainer}>
-                    <TouchableOpacity style={styles.filmDeleteTouch} onPress={()=>deleteFilm(film)}>
-                        <Text>
-                          <Icon name="trash" size={20} color="white"/>;  
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+        <>
+            <View style={styles.film}>
+                    <View style={styles.filmHeader}>
+                        <View style={styles.filmTitleContainer}>
+                            <Text style={styles.filmTitle}>
+                                {film.title.trim()}
+                            </Text>
+                        </View>
+                        <View style={styles.filmDeleteContainer}>
+                            <TouchableOpacity style={styles.filmDeleteTouch} onPress={changeModalVisibility}>
+                                <Text>
+                                <Icon name="trash" size={20} color="white"/>;  
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={styles.filmContainer}>
+                        <View style={styles.filmInfoVisibilityController}>
+                            {renderButton()}
+                        </View>               
+                        {renderFilmInfo()}             
+                    </View>
             </View>
-            <View style={styles.filmContainer}>
-                <View style={styles.filmInfoVisibilityController}>
-                    {renderButton()}
-                </View>               
-                {renderFilmInfo()}             
-            </View>
-      </View>
+            {renderModal()}
+        </>
     );
 }
 const styles = StyleSheet.create({

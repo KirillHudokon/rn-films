@@ -49,12 +49,12 @@ const searchFilms = async (req, res) => {
     try{
         if(how === 'stars'){
            let findedFilms = (await Films.find()).filter(film => {
-                return film.stars.split(',').map(val=>val.trim()).filter(star=> star.toLowerCase() === req.body.text.toLowerCase()).length
+                return film.stars.split(',').map(val=>val.trim()).filter(star=> star.toLowerCase().indexOf(req.body.text.toLowerCase()) !== -1).length
             })
             res.status(200).json(findedFilms)
         }
         if(how === 'title'){
-            res.status(200).json((await Films.find()).filter(film => film.title.toLowerCase() === req.body.text.toLowerCase()))   //await Films.find({title: req.body.text}) не могу сделать так потому что title из db нужен тоже в lowercase()
+            res.status(200).json((await Films.find()).filter(film => film.title.toLowerCase().indexOf(req.body.text.toLowerCase()) === 0))   
         }
     }catch(e){
         res.status(400).json({message:e.message})

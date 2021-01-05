@@ -1,10 +1,11 @@
 const express = require("express");
 const saveFile = require('../middlewares/saveTxt.middleware')
+const validateCreateFilm = require('../middlewares/createFilm.middleware')
 const {getFilms, createFilm, deleteFilm, sortFilms, searchFilms, importFile} = require("../controllers/films.js")
 const router = express.Router();
 
 router.get('/films', getFilms);
-router.post('/films', createFilm);
+router.post('/films', validateCreateFilm, createFilm);
 router.delete('/films/:id', deleteFilm);
 router.get('/films/sort/:type', sortFilms);
 router.post('/films/search/:how', searchFilms);

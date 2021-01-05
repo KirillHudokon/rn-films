@@ -6,6 +6,7 @@ import {
   StyleSheet
 } from 'react-native';
 import ActionsBar from '../containers/ActionsBar';
+import FilePicker from '../containers/FilePicker';
 import Films from '../containers/Films';
 import SearchBar from '../containers/SearchBar';
 
@@ -17,6 +18,7 @@ const App = ({componentId}) => {
         <SearchBar/>
         <ActionsBar componentId={componentId}/>
         <Films/>
+        <FilePicker/>
       </View>
     </ScrollView>
   );

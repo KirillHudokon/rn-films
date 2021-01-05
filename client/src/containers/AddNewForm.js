@@ -30,42 +30,48 @@ const AddNewForm = ({ addFilm, componentId }) => {
 
     const check = () => {
         const validation = {
-            title(val) {
-                if (val.length < 4) {
+            title(val){
+                if(val.length < 4){
                     return {
-                        name: 'title',
+                        name: 'title', 
                         message: 'not valid, length must be > 4'
                     }
                 }
             },
-            format(val) {
+            format(val){
                 const newVal = val.toLowerCase()
-                if (newVal !== 'vhs' && newVal !== 'dvd' && newVal !== 'blu-ray') {
+                if(newVal !== 'vhs' && newVal !== 'dvd' && newVal !== 'blu-ray'){
                     return {
-                        name: 'format',
+                        name : 'format',
                         message: 'unknown format'
                     }
                 }
             },
-            releaseYear(val) {
-                if (isNaN(val)) {
+            releaseYear(val){
+                if(isNaN(val)){
                     return {
                         name: 'releaseYear',
-                        message: 'release year must be a number'
+                        message : 'release year must be a number'
                     }
                 }
-                if (val < 1000) {
+                if(val<1850 || val>2020){
                     return {
                         name: 'releaseYear',
-                        message: 'not valid, value must be >= 1000'
+                        message : 'not valid, value must be >= 1850 and <= 2020'
                     }
                 }
             },
-            stars(val) {
-                if (val.length < 3) {
+            stars(val){
+                if(val.length < 3){
                     return {
                         name: 'stars',
-                        message: 'not valid, length must be > 3'
+                        message : 'not valid, length must be > 3'
+                    }
+                }
+                if([...new Set(val.split(',').map(field=> field.trim().toLowerCase()))].length !== val.split(',').map(field=> field.trim().toLowerCase()).length){
+                    return {
+                        name: 'stars',
+                        message : 'not valid, please remove same stars'
                     }
                 }
             }

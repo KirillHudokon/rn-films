@@ -20,9 +20,9 @@ const Films = ({
     const renderFilms = () => {
         if(loading){
             return <View style={styles.filmsInfo}>
-                 <Text style={styles.filmsInfoText}>
+                <Text style={styles.filmsInfoText}>
                     Loading...
-                 </Text>
+                </Text>
             </View>
         }
         if(!films.length){
@@ -35,14 +35,17 @@ const Films = ({
         return films.map(film => <Film key={film._id} deleteFilm={deleteFilm} film={film}/>)
     }
     return (
-        <View className={styles.films}>
+        <View style={styles.films}>
             {renderFilms()}
         </View>
     );
 }
 const styles = StyleSheet.create({
+    films:{
+        marginBottom: 35
+    },
     filmsInfo:{
-        marginBottom: 30
+        marginBottom: 20
     },
     filmsInfoText:{
         fontSize: 22,
