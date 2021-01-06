@@ -9,18 +9,22 @@ import ActionsBar from '../containers/ActionsBar';
 import FilePicker from '../containers/FilePicker';
 import Films from '../containers/Films';
 import SearchBar from '../containers/SearchBar';
-
+import Toast from 'react-native-toast-message';
+//console.disableYellowBox = true;
 
 const App = ({componentId}) => {
   return (
-    <ScrollView style={styles.app}>
-      <View style={styles.container}>
-        <SearchBar/>
-        <ActionsBar componentId={componentId}/>
-        <Films/>
-        <FilePicker/>
-      </View>
-    </ScrollView>
+    <>
+      <ScrollView style={styles.app}>
+        <View style={styles.container}>
+          <SearchBar/>
+          <ActionsBar componentId={componentId}/>
+          <Films/>
+          <FilePicker/>
+        </View>
+      </ScrollView>
+      <Toast ref={(ref) => Toast.setRef(ref)} />
+    </>
   );
 };
 

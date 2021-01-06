@@ -1,8 +1,8 @@
 import axios from 'axios'
-const url = "http://localhost:5000/films"
+const url = "http://192.168.1.102:5000/films"
 export class FilmsApi {
     get(){
-        return axios.get(url)
+        return axios.get(url) 
     }
     post(film){
         return axios.post(url, film)
@@ -24,7 +24,7 @@ export class FilmsActionsApi {
         formData.append('file', file)
         return axios.post(`${url}/import/`, formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
             }
         })
     }

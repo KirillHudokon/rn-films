@@ -74,7 +74,6 @@ export const importFileFail=(error)=>({
     type: types.IMPORT_FILE_FAIL,
     payload: error,
 })
-
 export const resetError = () => ({
     type: types.RESET_ERROR
 })
@@ -106,7 +105,11 @@ export const addFilm = (film) => async dispatch => {
         const {data} = await filmsApi.post(film)
         dispatch(addFilmSuccess(data))
     }catch(e){
-        dispatch(addFilmFail(e.message))
+        if(e.response?.data?.message){
+            dispatch(addFilmFail(e.response.data.message))
+        }else{
+            dispatch(addFilmFail(e.message))
+        }
     }
 }
 
@@ -137,6 +140,7 @@ export const importFile = (file) => async dispatch => {
         const {data} = await filmsActionsApi.import(file)
         dispatch(importFileSuccess(data))
     }catch(e){
+        console.log(e)
         dispatch(importFileFail(e.message))
     }
 }

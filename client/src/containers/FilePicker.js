@@ -14,8 +14,7 @@ const FilePicker = ({importFile}) => {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.allFiles],
       });
-      console.log(res)
-     // importFile(res);
+      importFile(res);
     } catch (err) {
         console.log(err)
     }

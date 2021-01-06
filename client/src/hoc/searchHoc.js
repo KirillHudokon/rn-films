@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 export default (Component) => (props) => {
-    const timer = 1500;
+    const timer = 1000;
     const [value, setValue] = useState('');
     const [searchTimeout, setSearchTimeout] = useState(0)
     const searchTimeoutHandler = (value) => {

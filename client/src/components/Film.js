@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
     },
     filmTitle: {
         textAlign: 'center',
-        color: 'white'
+        color: 'white',
+        fontSize: 17
     },
     filmContainer: {
         padding: 10

@@ -5,17 +5,33 @@ import {
     StyleSheet
 } from 'react-native'
 import {connect} from 'react-redux'
-import {getFilms, deleteFilm} from '../actions'
+import {getFilms, deleteFilm, resetError} from '../actions'
 import Film from '../components/Film'
+import Toast from 'react-native-toast-message';
 const Films = ({
-  films,
-  loading, 
+  films, 
   getFilms, 
-  deleteFilm
+  deleteFilm,
+  resetError
 }) => {
+    const {loading, error} = films
     useEffect(()=>{
         getFilms()
     }, [getFilms])
+    useEffect(()=>{
+        if(error){
+            console.log(error)
+            Toast.show({
+                type: 'error',
+                position: 'bottom',
+                text1: error,
+                visibilityTime: 4000,
+                autoHide: true,
+                bottomOffset: 40,
+                onHide: ()=>resetError(),
+              });
+        }
+    }, [error])
 
     const renderFilms = () => {
         if(loading){
@@ -25,14 +41,14 @@ const Films = ({
                 </Text>
             </View>
         }
-        if(!films.length){
+        if(!films.films.length){
             return <View style={styles.filmsInfo}>
                 <Text style={styles.filmsInfoText}>
                     No available films
                 </Text>
             </View>
         }
-        return films.map(film => <Film key={film._id} deleteFilm={deleteFilm} film={film}/>)
+        return films.films.map(film => <Film key={film._id} deleteFilm={deleteFilm} film={film}/>)
     }
     return (
         <View style={styles.films}>
@@ -53,11 +69,11 @@ const styles = StyleSheet.create({
     }
 })
 const mapStateToProps = store => ({
-    loading: store.films.loading,
-    films: store.films.films,
-});
+    films: store.films
+})
 const mapDispatchToProps = {
     getFilms,
-    deleteFilm
+    deleteFilm,
+    resetError
 }
   export default connect(mapStateToProps, mapDispatchToProps)(Films);
